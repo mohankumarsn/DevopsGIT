@@ -5,18 +5,18 @@ metadata:
   labels:
     app: myapp
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: myapp
   template:
     metadata:
       labels:
-        app: myapp
+        app: myapp1
     spec:
       containers:
         - name: myapp
-          image: alpine:latest
+          image: alpine:latestv1
           command: ['sh', '-c', 'while true; do echo "logging" >> /opt/logs.txt; sleep 1; done']
           volumeMounts:
             - name: data
@@ -27,7 +27,7 @@ spec:
           restartPolicy: Always
           command: ['sh', '-c', 'tail -F /opt/logs.txt']
           volumeMounts:
-            - name: data
+            - name: data1
               mountPath: /opt
       volumes:
         - name: data
